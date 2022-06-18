@@ -1,0 +1,101 @@
+using System;
+using System.IO;
+
+
+/*
+ --------------------------------------
+ firecode2099@gmail.com    18/6/2022
+ 
+ Class that move files from origins folder, 
+                   To
+ Another with respcetive names
+ 
+
+-Create one folder origin:
+    -3xFiles inside
+    -Jhon.txt
+    -Pablo.txt
+    -Pedro.txt 
+
+-------------------------------------
+ */
+
+
+
+namespace Search_file_Test
+{
+    class Program
+    {
+        
+
+
+
+        public static void getreadFolder()
+        {
+        
+            //Directory
+            var _myorigin = Directory.GetFiles("origin");
+            var create_file = Directory.CreateDirectory("Jhon");
+            var create_pedro = Directory.CreateDirectory("Pedro");
+            var create_pablo = Directory.CreateDirectory("Pablo");
+
+            //Destiny paths
+            string name;
+            string des = "Jhon\\Jhon.txt";
+            string des2 = "Pablo\\Pablo.txt";
+            string des3 = "Pedro\\Pedro.txt";
+
+            try
+            {
+                //Must be more than one file in the folder
+                if (_myorigin.Length>=1)
+                {
+
+                    foreach (var i in _myorigin)
+                    {
+                        name = _myorigin + i;
+
+                        if (i.Equals("origin\\Jhon.txt"))
+                        {
+                            Directory.Move(i, des);
+                        }
+                        else if (i.Equals("origin\\Pablo.txt"))
+                        {
+                            Directory.Move(i, des2);
+                        }
+                        else
+                        {
+                            Directory.Move(i, des3);
+                        }
+                    }
+                }
+                else {
+
+                    
+                    throw new IOException("Empty folder!");
+                }
+
+                Console.WriteLine("Files move directory destiny");
+
+            }
+            catch (FileNotFoundException fe)
+            {
+
+                System.Console.WriteLine("erro " + fe.Message);
+                Console.ReadKey();
+            }
+
+
+
+
+        }
+
+        static void Main(string[] args)
+        {
+
+            getreadFolder();
+            Console.ReadKey();
+
+        }
+    }
+}
